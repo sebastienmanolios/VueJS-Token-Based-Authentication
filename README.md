@@ -1,5 +1,8 @@
 # authentication_course
 
+I live coded with VueMastery's course you can find there
+https://www.vuemastery.com/courses/token-based-authentication/intro-to-authentication
+
 ## Project setup
 
 ```

@@ -19,7 +19,9 @@ const router = new Router({
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: Dashboard
+      component: Dashboard,
+      // the meta property allows us to add custom attributes to the route
+      meta: { requiresAuth: true }
     },
     {
       path: '/register',
@@ -32,6 +34,18 @@ const router = new Router({
       component: LoginUser
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  const loggedIn = localStorage.getItem('user')
+
+  // to.matched will give us an array of the records that match that to route
+  // some method allows us to iterate over taht collection of routes
+  if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
+    // redirect to home page
+    next('/')
+  }
+  next()
 })
 
 export default router
